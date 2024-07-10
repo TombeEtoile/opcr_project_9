@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+html, body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.navbar {
+    background-color: #4090ff;
+}
+
+.btn-primary {
+    border: none;
+}
+
+.footer {
+    background-color: #4090ff;
+}

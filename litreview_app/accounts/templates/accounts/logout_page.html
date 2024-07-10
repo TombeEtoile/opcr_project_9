@@ -1,0 +1,17 @@
+{% extends 'reviews/layouts/base.html' %}
+
+{% block title %}Déconnexion{% endblock title %}
+
+{% block body %}
+  <h1>Déconnexion</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <form method="post" action="{% url 'accounts:logout' %}">
+          {% csrf_token %}
+          <input type="submit" class="btn btn-primary" value="Je me déconnecte !">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock body %}

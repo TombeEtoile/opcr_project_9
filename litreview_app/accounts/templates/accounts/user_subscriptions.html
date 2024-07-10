@@ -1,0 +1,21 @@
+{% extends 'reviews/layouts/base.html' %}
+
+{% block title %}Mes abonnements{% endblock title %}
+
+{% block body %}
+    <h1>Mes abonnements</h1>
+
+    <h2>Abonnements</h2>
+    <ul>
+        {% for subscription in subscriptions %}
+            <li>{{ subscription.followed_user.username }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Abonnés</h2>
+    <ul>
+        {% for subscriber in subscribers %}
+            <li>{{ subscriber.user.username }}</li>
+        {% endfor %}
+    </ul>
+{% endblock body %}

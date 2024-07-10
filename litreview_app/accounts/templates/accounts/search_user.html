@@ -1,0 +1,28 @@
+{% extends 'reviews/layouts/base.html' %}
+
+{% block title %}Profil de {{ user_profile.username }}{% endblock title %}
+
+{% block body %}
+
+    <h1 class="text-center">Résultats :</h1>
+
+    {% for user in users %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3>Nom d'utilisateur : {{ user.username }}</h3>
+                <h3>Email : {{ user.email }}</h3>
+                {% if user_profile.id == request.user.id %}
+                <a class="btn btn-primary" href="{% url 'accounts:user_update' %}">Modifier mes informations</a>
+                {% else %}
+                    {% if not is_following %}
+                        <a class="btn btn-primary m" href="{% url 'accounts:follow_user' user.id %}">Suivre</a>
+                    {% else %}
+                        <a class="btn btn-danger" href="{% url 'accounts:unfollow_user' user.id %}">Ne plus suivre</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock body %}

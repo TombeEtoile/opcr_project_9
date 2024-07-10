@@ -1,0 +1,38 @@
+{% extends 'reviews/layouts/base.html' %}
+
+{% block title %}Details{% endblock title %}
+
+{% block body %}
+
+    <h1>Détails</h1>
+
+    <div class="card m-3 shadow">
+        <div class="card-body">
+            <h2 class="card-title">Critique de "{{ review.headline }}"</h2>
+                {% if review.image %}
+                    <img src="{{ review.image.url }}" class="card-img-top" style="width: 10rem;" alt="...">
+                {% endif %}
+            <p>Note : {{ review.rating }}/5</p>
+            <p class="card-text">{{ review.body }}</p>
+        </div>
+        {% if review.ticket.user.username %}
+                        <div class="card m-3 p-3 shadow">
+                            <h2>Ticket pour "{{ review.ticket.headline }}"</h2>
+                            {% if item.ticket.image %}
+                                <img src="{{ review.ticket.image.url }}" class="card-img-top" style="width: 10rem;" alt="...">
+                            {% endif %}
+                            <p>{{ review.ticket.body }}</p>
+                            <p>Auteur : <a class="btn" href="{% url 'accounts:user_profile' review.ticket.user.id %}">{{ review.ticket.user.username }}</a></p>
+                        </div>
+                    {% endif %}
+
+        <div class="card-footer">
+            <a href="{% url 'reviews:index' %}" class="btn btn-primary">Retour</a>
+            {% if review.user == request.user %}
+                <a href="{% url 'reviews:update_review' review.id %}" class="btn btn-primary">Modifier</a>
+                <a href="{% url 'reviews:delete_review' review.id %}" class="btn btn-danger">Supprimer</a>
+            {% endif %}
+        </div>
+        </div>
+    </div>
+{% endblock body %}

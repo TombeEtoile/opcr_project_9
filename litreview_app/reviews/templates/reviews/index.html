@@ -1,0 +1,103 @@
+{% extends 'reviews/layouts/base.html' %}
+
+{% block title %}Critiques{% endblock title %}
+
+{% block body %}
+    <h1>Flux</h1>
+
+        {% load review_tags %}
+
+        {% for item in items %}
+
+            {% if item|instanceof:'Review' %}
+
+                <div class="card shadow mb-3">
+                    <div class="card-body">
+                        {% if item.ticket.user.username %}
+                            <h2 class="card-title">Critique de "{{ item.ticket.headline }}"</h2>
+                        {% else %}
+                            <h2 class="card-title">Critique de "{{ item.headline }}"</h2>
+                        {% endif %}
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="card-img-top" style="width: 10rem;" alt="...">
+                        {% endif %}
+                        <p class="card-text">{{ item.body|truncatewords:20 }}</p>
+                        <p class="card-text">Note de l'auteur : {{ item.rating }}/5</p>
+                        <a href="{% url 'reviews:detail' item.id %}" class="btn btn-success">Voir plus</a>
+                        {% if item.user == request.user %}
+                            <a href="{% url 'reviews:update_review' item.id %}" class="btn btn-primary">Modifier</a>
+                            <a href="{% url 'reviews:delete_review' item.id %}" class="btn btn-danger">Supprimer</a>
+                        {% endif %}
+                    </div>
+
+                    {% if item.ticket.user.username %}
+                        <div class="card m-3 p-3 shadow">
+                            <h2>Ticket pour "{{ item.ticket.headline }}"</h2>
+                            {% if item.ticket.image %}
+                                <img src="{{ item.ticket.image.url }}" class="card-img-top" style="width: 10rem;" alt="...">
+                            {% endif %}
+                            <p>{{ item.ticket.body }}</p>
+                            <p>Auteur : <a class="btn" href="{% url 'accounts:user_profile' item.ticket.user.id %}">{{ item.ticket.user.username }}</a></p>
+                        </div>
+                    {% endif %}
+
+                    <a class="btn" href="{% url 'accounts:user_profile' item.user.id %}">
+                        <div class="card-footer">
+                            Auteur : {{ item.user.username }}
+                        </div>
+                    </a>
+                </div>
+
+
+
+
+
+
+            {% elif item|instanceof:'Ticket' %}
+                <div class="card m-3 shadow">
+                    <div class="card-body">
+                        <h2 class="card-title">Ticket pour "{{ item.headline }}"</h2>
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" class="card-img-top" style="width: 10rem;" alt="...">
+                        {% endif %}
+                        <p class="card-text">{{ item.body|truncatewords:20 }}</p>
+                        <a href="{% url 'reviews:details_ticket' item.id %}" class="btn btn-success">Voir plus</a>
+                        {% if item.user == request.user %}
+                            <a href="{% url 'reviews:update_ticket' item.id %}" class="btn btn-primary">Modifier</a>
+                            <a href="{% url 'reviews:delete_ticket' item.id %}" class="btn btn-danger">Supprimer</a>
+                        {% else %}
+
+                                <a href="{% url 'reviews:ticket_answer' item.id %}" class="btn btn-primary">Répondre</a>
+                        {% endif %}
+                    </div>
+                    <a class="btn" href="{% url 'accounts:user_profile' item.user.id %}">
+                        <div class="card-footer">
+                            Auteur : {{ item.user.username }}
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+
+        {% endfor %}
+
+
+    <nav>
+        <ul class="pagination justify_content_center">
+            {% if items.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="/?page={{ items.previous_page_number }}">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            <li class="page-item"><p class="page-link text-muted">Page {{ items.number }} sur {{ items.paginator.num_pages }}</p></li>
+            {% if items.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="/?page={{ items.next_page_number }}">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endblock body %}

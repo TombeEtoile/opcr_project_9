@@ -1,0 +1,40 @@
+{% extends 'reviews/layouts/base.html' %}
+
+{% block title %}Critiques{% endblock title %}
+
+{% block body %}
+
+    <h1>Mes critiques :</h1>
+    <ul>
+        {% for review in reviews %}
+            <div class="card m-3 shadow">
+                <div class="card-body">
+                    <h2 class="card-title">Critique de "{{ review.headline }}"</h2>
+                        {% if review.image %}
+                            <img src="{{ review.image.url }}" class="card-img-top" style="width: 10rem;" alt="...">
+                        {% endif %}
+                    <p class="card-text">{{ review.body|truncatewords:20 }}</p>
+                    <a href="{% url 'reviews:detail' review.id %}" class="btn btn-success">Voir plus</a>
+                    {% if review.user == request.user %}
+                        <a href="{% url 'reviews:update_review' review.id %}" class="btn btn-primary">Modifier</a>
+                        <a href="{% url 'reviews:delete_review' review.id %}" class="btn btn-danger">Supprimer</a>
+                    {% endif %}
+                </div>
+
+                {% if review.ticket.user.username %}
+                        <div class="card m-3 p-3 shadow">
+                            <h2>Ticket pour "{{ review.ticket.headline }}"</h2>
+                            {% if review.ticket.image %}
+                                <img src="{{ review.ticket.image.url }}" class="card-img-top" style="width: 10rem;" alt="...">
+                            {% endif %}
+                            <p>{{ review.ticket.body }}</p>
+                            <p>Auteur : <a class="btn" href="{% url 'accounts:user_profile' review.ticket.user.id %}">{{ review.ticket.user.username }}</a></p>
+                        </div>
+                    {% endif %}
+                <div class="card-footer">
+                    {{ review.user.username }}
+                </div>
+            </div>
+        {% endfor %}
+    </ul>
+{% endblock body %}

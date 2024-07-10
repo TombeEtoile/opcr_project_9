@@ -1,0 +1,16 @@
+{% extends 'reviews/layouts/base.html' %}
+
+{% block title %}Modifier mes informations personnelles{% endblock title %}
+
+{% block body %}
+    <h1>Modifier mes informations personnelles</h1>
+
+    <div class="card mb-3">
+        <h2>Modifier les informations personnelles</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enregistrer les modifications</button>
+        </form>
+    </div>
+{% endblock body %}
