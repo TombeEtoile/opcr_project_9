@@ -12,7 +12,7 @@
                 <h3>Nom d'utilisateur : {{ user.username }}</h3>
                 <h3>Email : {{ user.email }}</h3>
                 {% if user_profile.id == request.user.id %}
-                <a class="btn btn-primary" href="{% url 'accounts:user_update' %}">Modifier mes informations</a>
+                    <a class="btn btn-primary" href="{% url 'accounts:user_update' %}">Modifier mes informations</a>
                 {% else %}
                     {% if not is_following %}
                         <a class="btn btn-primary m" href="{% url 'accounts:follow_user' user.id %}">Suivre</a>

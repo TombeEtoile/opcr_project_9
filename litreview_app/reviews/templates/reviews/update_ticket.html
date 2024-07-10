@@ -3,38 +3,38 @@
 {% block title %}Modification ticket{% endblock title %}
 
 {% block body %}
-  <h1>Modifiez votre ticket de "{{ ticket.headline }}"</h1>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <form action="" method="post" enctype="multipart/form-data">
-          {% if form.subject.errors %}
-            {% for error in form.subject.errors %}
-              <p class="text-danger"><strong>{{ error }}</strong></p>
-            {% endfor %}
-          {% endif %}
-          {% csrf_token %}
-          {% for field in form %}
-            <div class="form-group">
-              {{ field.label_tag }}
-              {{ field }}
-              {% if field.help_text %}
-                <p class="help">{{ field.help_text }}</p>
-              {% endif %}
-              {% if form.subject.errors %}
-                {% for error in form.subject.errors %}
-                  <p class="text-danger"><strong>{{ error }}</strong></p>
-                {% endfor %}
-              {% endif %}
+    <h1>Modifiez votre ticket de "{{ ticket.headline }}"</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% if form.subject.errors %}
+                        {% for error in form.subject.errors %}
+                            <p class="text-danger"><strong>{{ error }}</strong></p>
+                        {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <p class="help">{{ field.help_text }}</p>
+                            {% endif %}
+                            {% if form.subject.errors %}
+                                {% for error in form.subject.errors %}
+                                    <p class="text-danger"><strong>{{ error }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    {% if ticket.image %}
+                        <img class="mb-3" src="{{ ticket.image.url }}" width="200"><br>
+                    {% endif %}
+                    <input type="submit" class="btn btn-primary" value="Publier la modification">
+                </form>
             </div>
-          {% endfor %}
-          {% if ticket.image %}
-            <img class="mb-3" src="{{ ticket.image.url }}" width="200"><br>
-          {% endif %}
-          <input type="submit" class="btn btn-primary" value="Publier la modification">
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 
 {% endblock body %}

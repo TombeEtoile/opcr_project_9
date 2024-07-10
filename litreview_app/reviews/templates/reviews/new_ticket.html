@@ -3,34 +3,34 @@
 {% block title %}New ticket{% endblock title %}
 
 {% block body %}
-  <h1>Demander une critique</h1>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <form action="" method="post" enctype="multipart/form-data">
-          {% if form.subject.errors %}
-            {% for error in form.subject.errors %}
-              <p class="text-danger"><strong>{{ error }}</strong></p>
-            {% endfor %}
-          {% endif %}
-          {% csrf_token %}
-          {% for field in ticket_form %}
-          <div class="form-group">
-            {{ field.label_tag }}
-            {{ field }}
-            {% if field.help_text %}
-              <p class="help">{{ field.help_text }}</p>
-            {% endif %}
-            {% if form.subject.errors %}
-              {% for error in form.subject.errors %}
-                <p class="text-danger"><strong>{{ error }}</strong></p>
-              {% endfor %}
-            {% endif %}
-          </div>
-          {% endfor %}
-          <input type="submit" class="btn btn-primary" value="Publier ma demande de critique">
-        </form>
-      </div>
+    <h1>Demander une critique</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% if form.subject.errors %}
+                        {% for error in form.subject.errors %}
+                            <p class="text-danger"><strong>{{ error }}</strong></p>
+                        {% endfor %}
+                    {% endif %}
+                    {% csrf_token %}
+                    {% for field in ticket_form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <p class="help">{{ field.help_text }}</p>
+                            {% endif %}
+                            {% if form.subject.errors %}
+                                {% for error in form.subject.errors %}
+                                    <p class="text-danger"><strong>{{ error }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" class="btn btn-primary" value="Publier ma demande de critique">
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 {% endblock body %}

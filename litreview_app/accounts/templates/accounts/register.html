@@ -3,35 +3,35 @@
 {% block title %}Login{% endblock title %}
 
 {% block body %}
-  <h1>M'inscrire</h1>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-8 mx-auto">
-        <form action="" method="post" enctype="multipart/form-data">
-          {{ form.as_p }}
-          {% csrf_token %}
-          {% if form.non_field.errors %}
-            {% for error in form.subject.errors %}
-              <p class="text-danger"><strong>{{ error }}</strong></p>
-            {% endfor %}
-          {% endif %}
-          {% for field in review_form %}
-          <div class="form-group">
-            {{ field.label_tag }}
-            {{ field }}
-            {% if field.help_text %}
-              <p class="help">{{ field.help_text }}</p>
-            {% endif %}
-            {% if form.subject.errors %}
-              {% for error in form.subject.errors %}
-                <p class="text-danger"><strong>{{ error }}</strong></p>
-              {% endfor %}
-            {% endif %}
-          </div>
-          {% endfor %}
-          <input type="submit" class="btn btn-primary" value="Je m'inscrit !">
-        </form>
-      </div>
+    <h1>M'inscrire</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {{ form.as_p }}
+                    {% csrf_token %}
+                    {% if form.non_field.errors %}
+                        {% for error in form.subject.errors %}
+                            <p class="text-danger"><strong>{{ error }}</strong></p>
+                        {% endfor %}
+                    {% endif %}
+                    {% for field in review_form %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            {% if field.help_text %}
+                                <p class="help">{{ field.help_text }}</p>
+                            {% endif %}
+                            {% if form.subject.errors %}
+                                {% for error in form.subject.errors %}
+                                    <p class="text-danger"><strong>{{ error }}</strong></p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <input type="submit" class="btn btn-primary" value="Je m'inscrit !">
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 {% endblock body %}

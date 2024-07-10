@@ -42,7 +42,6 @@ def details(request, id):
 
 @login_required
 def new_review(request):
-
     form = ReviewForm()
     if request.method == 'POST':
         form = ReviewForm(request.POST)
@@ -175,23 +174,3 @@ def delete_ticket(request, id):
         return redirect('reviews:index')
     else:
         raise Http404
-
-
-'''
-def ticket_answer(request, id):
-    ticket = Ticket.objects.get(id=id)
-    if request.method == 'POST':
-        review_form = TicketAnswerForm(request.POST, request.FILES)
-        if review_form.is_valid():
-            form = review_form.save(commit=False)
-            form.user = request.user
-            form.save()
-            return redirect('reviews:index')
-    else:
-        review_form = ReviewForm()
-    context = {
-        'ticket': ticket,
-        'review_form': review_form,
-    }
-    return render(request, 'reviews/ticket_answer.html', context)
-'''

@@ -16,7 +16,8 @@
                 {% if not is_following %}
                     <a class="btn btn-primary" href="{% url 'accounts:follow_user' user_profile.id %}">Suivre</a>
                 {% else %}
-                    <a class="btn btn-danger" href="{% url 'accounts:unfollow_user' user_profile.id %}">Ne plus suivre</a>
+                    <a class="btn btn-danger" href="{% url 'accounts:unfollow_user' user_profile.id %}">Ne plus
+                        suivre</a>
                 {% endif %}
             {% endif %}
         </div>

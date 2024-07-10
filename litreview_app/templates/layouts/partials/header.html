@@ -1,50 +1,58 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary mb-4">
-  <div class="container-fluid">
-    <a class="navbar-brand text-black" href="{% url 'reviews:index' %}">LitReview</a>
-    <p>Vous êtes connecté en tant que {{ request.user.username }}</p>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    </button>
-    <div class="navbar navbar-light bg-light justify-content-between" id="navbarSupportedContent">
-      <form action="{% url 'accounts:search_user' %}" method="get" class="d-flex ml-3">
-        <input placeholder="Cherchez un utilisateur" class="form-control me-2" type="search" name="search">
-        <button class="btn btn-outline m1-2" type="submit">Rechercher</button>
-      </form>
-      <ul class="navbar-nav mr-auto">
-        {% if request.user.is_authenticated %}
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Publier un post
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link text-black" aria-current="page" href="{% url 'reviews:new_review' %}">Publier une critique</a></li>
-            <li><a class="nav-link text-black" aria-current="page" href="{% url 'reviews:new_ticket' %}">Publier un ticket</a></li>
-          </ul>
-        </li>
+    <div class="container-fluid">
+        <a class="navbar-brand text-black" href="{% url 'reviews:index' %}">LitReview</a>
+        <p>Vous êtes connecté en tant que {{ request.user.username }}</p>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        </button>
+        <div class="navbar navbar-light bg-light justify-content-between" id="navbarSupportedContent">
+            <form action="{% url 'accounts:search_user' %}" method="get" class="d-flex ml-3">
+                <input placeholder="Cherchez un utilisateur" class="form-control me-2" type="search" name="search">
+                <button class="btn btn-outline m1-2" type="submit">Rechercher</button>
+            </form>
+            <ul class="navbar-nav mr-auto">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Publier un post
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link text-black" aria-current="page"
+                                   href="{% url 'reviews:new_review' %}">Publier une critique</a></li>
+                            <li><a class="nav-link text-black" aria-current="page"
+                                   href="{% url 'reviews:new_ticket' %}">Publier un ticket</a></li>
+                        </ul>
+                    </li>
 
-          <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Votre profil
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="nav-link text-black" methods="post" href="{% url 'accounts:user_profile' request.user.id %}">Mes informations</a></li>
-            <li><a class="nav-link text-black" aria-current="page" href="{% url 'reviews:user_reviews' %}">Mes critiques</a></li>
-            <li><a class="nav-link text-black" methods="post" href="{% url 'accounts:user_subscriptions' %}">Mes abonnements</a></li>
-          </ul>
-        </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Votre profil
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="nav-link text-black" methods="post"
+                                   href="{% url 'accounts:user_profile' request.user.id %}">Mes informations</a></li>
+                            <li><a class="nav-link text-black" aria-current="page"
+                                   href="{% url 'reviews:user_reviews' %}">Mes critiques</a></li>
+                            <li><a class="nav-link text-black" methods="post"
+                                   href="{% url 'accounts:user_subscriptions' %}">Mes abonnements</a></li>
+                        </ul>
+                    </li>
 
-          <li class="nav-item">
-            <a class="nav-link text-black" methods="post" href="{% url 'accounts:logout_page' %}">Déconnection</a>
-          </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black" methods="post" href="{% url 'accounts:logout_page' %}">Déconnection</a>
+                    </li>
 
-        {% else %}
-          <li class="nav-item">
-            <a class="nav-link text-black" href="{% url 'accounts:login' %}">Me connecter</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-black" href="{% url 'accounts:register' %}">M'inscrire</a>
-          </li>
-        {% endif %}
-      </ul>
-    </div>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-black" href="{% url 'accounts:login' %}">Me connecter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-black" href="{% url 'accounts:register' %}">M'inscrire</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </nav>
