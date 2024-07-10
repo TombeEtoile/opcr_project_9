@@ -1,5 +1,7 @@
 # OPCR P9 LitReviews
 
+Ce projet a été réalisé dans le cadre de ma formation de Développeur d'Applications Python chez OpenClassrooms. Il s'agit d'une application web créée avec Django pour une entreprise fictive nommée LitReviews. Cette application est un réseau social qui permet de demander et de publier des critiques de livres.
+
 ## Installation & Lancement
 
 ### Prérequis
