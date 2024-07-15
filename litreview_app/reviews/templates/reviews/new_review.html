@@ -28,6 +28,9 @@
                             {% endif %}
                         </div>
                     {% endfor %}
+                    {% if review.image %}
+                        <img  class="card-img-top" src="{{ review.image.url }}" style="width: 10rem;" alt="..."><br>
+                    {% endif %}
                     <input type="submit" class="btn btn-primary" value="Publier la critique">
                 </form>
             </div>

@@ -13,20 +13,27 @@ def index(request):
     reviews_number = reviews.count()
     tickets = Ticket.objects.order_by('-time_created').all()
     tickets_number = tickets.count()
+    user_reviews = set()
+    for review in reviews:
+        if review.user == request.user and review.ticket:
+            user_reviews.add(review.ticket.id)
+
     combined = sorted(
         list(reviews) + list(tickets),
-        key=lambda x: x.time_created if isinstance(x, Ticket) else x.time_created,
+        key=lambda x: x.time_created,
         reverse=True
     )
     paginator = Paginator(combined, 5)
     page_number = request.GET.get('page')
     page_object = paginator.get_page(page_number)
+
     context = {
         'items': page_object,
         'reviews': reviews,
         'tickets': tickets,
         'reviews_number': reviews_number,
         'tickets_number': tickets_number,
+        'user_reviews': user_reviews
     }
     return render(request, 'reviews/index.html', context)
 
@@ -44,7 +51,7 @@ def details(request, id):
 def new_review(request):
     form = ReviewForm()
     if request.method == 'POST':
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
             review.user = request.user
@@ -133,7 +140,7 @@ def ticket_answer(request, id):
         if review_form.is_valid():
             review = review_form.save(commit=False)
             review.user = request.user
-            review.ticket = ticket  # Associer le ticket à la critique
+            review.ticket = ticket
             review.save()
             return redirect('reviews:index')
     else:
